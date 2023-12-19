@@ -24,7 +24,7 @@ private:
   {
     auto message = std_msgs::msg::Float32MultiArray();
     // Target point location published by form x,y,z coordinates
-    message.data = {1.0, 2.0, 3.0};
+    message.data = {10, 10, 3.0};
 
     // Publish the message
     publisher_->publish(message);
