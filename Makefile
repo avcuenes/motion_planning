@@ -45,3 +45,16 @@ run_home_point:
 run_target_point:
 	@make source_project
 	ros2 run target_point_pub targetpoint
+
+## Run just rrt star algorithm
+.PHONY : run_rrt_start
+run_rrt_start:
+	@make source_project
+	ros2 run  rrt_start rrtstart 
+
+
+## Run just obstacle point publisher
+.PHONY : run_obstacle_point
+run_obstacle_point:
+	@make source_project
+	ros2 run obstacle_location obstaclelocation
