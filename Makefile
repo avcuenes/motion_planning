@@ -22,10 +22,10 @@ build_target_point:
 ## Build just rrt start algorithm 
 .PHONY : build_rrt_start
 build_rrt_start:
-	colcon build --packages-select rrt_start
+	colcon build --packages-select rrt_star
 
 ## Build just obstacle point publisher 
-.PHONY : build_rr
+.PHONY : build_obstacle_point_publisher
 build_obstacle_point_publisher:
 	colcon build --packages-select obstacle_location
 
