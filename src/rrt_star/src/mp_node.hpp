@@ -4,6 +4,7 @@
 #include "std_msgs/msg/string.hpp"
 #include <std_msgs/msg/float32_multi_array.hpp>
 #include <iostream>
+#include "vehiclemodel.hpp"
 using std::placeholders::_1;
 
 class MP : public rclcpp::Node
@@ -28,7 +29,7 @@ private:
         float r;
     } obstaclepoint;
 
-                
+    VehicleModel model1;
 
     /* obstacles location callback function*/
     void obstacle_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg) ;
