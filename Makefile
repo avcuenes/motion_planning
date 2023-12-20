@@ -29,6 +29,12 @@ build_rrt_start:
 build_obstacle_point_publisher:
 	colcon build --packages-select obstacle_location
 
+## Build just viz tool 
+.PHONY : build_viz_tool
+build_viz_tool:
+	colcon build --packages-select visulization
+
+
 ## Source project
 .PHONY : source_project
 source_project:
