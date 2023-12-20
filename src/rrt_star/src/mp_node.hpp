@@ -30,6 +30,10 @@ private:
     } obstaclepoint;
 
     VehicleModel model1;
+    RRTStar rrtStar;
+
+   
+    
 
     /* obstacles location callback function*/
     void obstacle_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg) ;
@@ -37,11 +41,18 @@ private:
     void homepoint_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg) ;
     /*targetpoint location callback function*/
     void targetpoint_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg) ;
+
+
+    // Publish the path coordinates
+    void    publishPath();    
     
 
     
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr obstaclepoints_;    
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr homepoint_;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr targetpoint_;
+
+    rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr path_publisher_;
+
     
 };
