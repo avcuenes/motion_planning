@@ -97,6 +97,7 @@ std::vector<NodeRRT*> RRTStar::RRTStarAlgorithm() {
     std::vector<NodeRRT*> nodes;
     NodeRRT* root = new NodeRRT(startX, startY,1,1,1);
     root->cost = 0.0;
+    root->parent  = nullptr;
     nodes.push_back(root);
 
     for (int iter = 0; iter < maxIterations; ++iter) {
