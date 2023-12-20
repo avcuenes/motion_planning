@@ -24,7 +24,7 @@ private:
   {
     auto message = std_msgs::msg::Float32MultiArray();
     // Obstacle point location published by form x,y  coordinates and radius of obstacle
-    message.data = {1.0,4.5,1.2, 1.2,2.4,2, 5.3,2.5,2, 8.2,5,3};
+    message.data = { 3,3,1, 5,5,1};
 
     // Publish the message
     publisher_->publish(message);
