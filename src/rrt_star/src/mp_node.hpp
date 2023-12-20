@@ -5,6 +5,8 @@
 #include <std_msgs/msg/float32_multi_array.hpp>
 #include <iostream>
 #include "vehiclemodel.hpp"
+#include "rrtstar.cpp"
+
 using std::placeholders::_1;
 
 class MP : public rclcpp::Node
@@ -14,7 +16,7 @@ public:
 
 private:
     /*
-    Define structure for home point and target point */
+    Define structure for home point and target poi"nt */
     
     struct {
         float x;
