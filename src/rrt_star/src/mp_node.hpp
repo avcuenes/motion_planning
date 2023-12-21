@@ -76,5 +76,10 @@ private:
 
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr path_publisher_;
 
+    bool message_obstacle_;
+    bool message_homepoint_;
+    bool message_targetpoint_;
+    bool message_mapconst_;
+
     
 };

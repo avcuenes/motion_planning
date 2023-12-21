@@ -21,9 +21,15 @@ MP::MP() :  Node("MotionPlanning")
     mapconst_ = this->create_subscription<std_msgs::msg::Float32MultiArray>(
       "map_const", 10, std::bind(&MP::map_callback, this, _1));
 
-       
+      
 
     path_publisher_ = create_publisher<std_msgs::msg::Float32MultiArray>("path_points", 10);
+
+    message_obstacle_ = false;
+    message_homepoint_ = false;
+    message_targetpoint_ = false;
+    message_mapconst_ = false;
+
     
 }
 
@@ -35,6 +41,7 @@ void MP::map_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg)
   mapconstraint.xmax = map_sub[2];
   mapconstraint.ymax = map_sub[3];
   
+  message_mapconst_ = true;
   
   RCLCPP_INFO(get_logger(), "map constraints: [%.2f, %.2f, %.2f,%.2f]",
               mapconstraint.xmin, mapconstraint.ymin, mapconstraint.xmax, mapconstraint.ymax);
@@ -55,7 +62,7 @@ void MP::obstacle_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg
         obstacleX, obstacleY,obstacleR );
   }
 
-    
+  message_obstacle_ = true;
 }
 
 
@@ -67,7 +74,14 @@ void MP::homepoint_callback(const std_msgs::msg::Float32MultiArray::SharedPtr ms
   
   RCLCPP_INFO(get_logger(), "homepoint: [%.2f, %.2f, %.2f]",
               homepoint.x, homepoint.y, homepoint.z);
-  publishPath();
+  
+  message_homepoint_ = true;
+  
+  if(message_homepoint_ && message_mapconst_ && message_targetpoint_  )
+  {
+    publishPath();
+  }
+  
   
 }
 
@@ -119,6 +133,8 @@ void MP::targetpoint_callback(const std_msgs::msg::Float32MultiArray::SharedPtr 
   
   RCLCPP_INFO(get_logger(), "target_point: [%.2f, %.2f, %.2f]",
               targetpoint.x,  targetpoint.y,  targetpoint.z);
+
+  message_targetpoint_ = true;
 }
 
 
