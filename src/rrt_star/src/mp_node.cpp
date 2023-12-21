@@ -74,7 +74,7 @@ void MP::homepoint_callback(const std_msgs::msg::Float32MultiArray::SharedPtr ms
 
 void MP::publishPath() {
 
-    rrtStar.setHomeandTargetPoint(homepoint.x,homepoint.y,targetpoint.x,targetpoint.y);
+    /*rrtStar.setHomeandTargetPoint(homepoint.x,homepoint.y,targetpoint.x,targetpoint.y);
     rrtStar.setMapConstraint(mapconstraint.xmin, mapconstraint.ymin, mapconstraint.xmax, mapconstraint.ymax);
     rrtStar.setStepSize(1);
     rrtStar.setMaxIterations(50);
@@ -90,9 +90,39 @@ void MP::publishPath() {
         path_msg.data.push_back(static_cast<float>(current->x));
         path_msg.data.push_back(static_cast<float>(current->y));
         current = current->parent;
-    }
+    }*/
 
-    
+    std_msgs::msg::Float32MultiArray path_msg;
+    path_msg.data.clear();
+    switch (algorithm) {
+		case Algorithms::KinoRRTStar:{
+      rrtStar.setHomeandTargetPoint(homepoint.x,homepoint.y,targetpoint.x,targetpoint.y);
+      rrtStar.setMapConstraint(mapconstraint.xmin, mapconstraint.ymin, mapconstraint.xmax, mapconstraint.ymax);
+      rrtStar.setStepSize(1);
+      rrtStar.setMaxIterations(50);
+      std::vector<NodeRRT*> nodes = rrtStar.RRTStarAlgorithm();
+     
+      // Assuming the goal is the last node in the vector
+      NodeRRT* current = nodes.back();
+
+      while (current != nullptr) {
+          path_msg.data.push_back(static_cast<float>(current->x));
+          path_msg.data.push_back(static_cast<float>(current->y));
+          current = current->parent;
+      }
+      
+      }
+			break;
+
+		case Algorithms::AStar: {
+				/* code */
+			}
+			break;
+
+		case Algorithms::CHOMP: {
+			}
+			break;
+		}
 
     // Publish the path coordinates
     path_publisher_->publish(path_msg);

@@ -7,12 +7,19 @@
 #include "vehiclemodel.hpp"
 #include "rrtstar.cpp"
 
+enum Algorithms 
+{   KinoRRTStar = 0, 
+    AStar ,
+    CHOMP 
+};
 using std::placeholders::_1;
 
 class MP : public rclcpp::Node
 {
 public:
   MP();
+
+  int algorithm{0};
 
 private:
     /*
