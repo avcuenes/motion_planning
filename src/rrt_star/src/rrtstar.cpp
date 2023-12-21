@@ -118,7 +118,7 @@ std::vector<NodeRRT*> RRTStar::RRTStarAlgorithm() {
     }
 
    // Connect the goal to the nearest node in the final tree
-    /*NodeRRT* goalNode = new NodeRRT(goalX, goalY, 1, 1, 1);
+    NodeRRT* goalNode = new NodeRRT(goalX, goalY, 1, 1, 1);
     NodeRRT* nearestToGoal = findNearestNode(nodes, goalNode);
     NodeRRT* finalGoalNode = steer(nearestToGoal, goalNode);
 
@@ -128,20 +128,7 @@ std::vector<NodeRRT*> RRTStar::RRTStarAlgorithm() {
 
         nodes.push_back(finalGoalNode);
     }
-    std::cout << "enes1" << std::endl;
-    int i = 0;
-    for (const auto& node : nodes)
-    {
-        std::cout << node->x << std::endl;
-        std::cout << i << std::endl;
-        i ++;
-    }
-    
-    // Extract the best path from the nodes using a maximum iteration count
-    std::vector<NodeRRT*>  bestPath = searchBestGoalNode(nodes);*/
-    
-   
-
+      
     return nodes;
 }
 

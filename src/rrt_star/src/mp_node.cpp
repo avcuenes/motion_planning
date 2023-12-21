@@ -75,7 +75,7 @@ void MP::homepoint_callback(const std_msgs::msg::Float32MultiArray::SharedPtr ms
 void MP::publishPath() {
 
     rrtStar.setHomeandTargetPoint(homepoint.x,homepoint.y,targetpoint.x,targetpoint.y);
-    rrtStar.setMapConstraint(-1, -1, 11, 11);
+    rrtStar.setMapConstraint(mapconstraint.xmin, mapconstraint.ymin, mapconstraint.xmax, mapconstraint.ymax);
     rrtStar.setStepSize(1);
     rrtStar.setMaxIterations(50);
     std::vector<NodeRRT*> nodes = rrtStar.RRTStarAlgorithm();
@@ -83,15 +83,16 @@ void MP::publishPath() {
      
     std_msgs::msg::Float32MultiArray path_msg;
     path_msg.data.clear();
+    // Assuming the goal is the last node in the vector
+    NodeRRT* current = nodes.back();
 
-    // Extract x and y coordinates from the nodes
-    for (const auto& node : nodes) {
-        std::cout << nodes.size() << std::endl;
-        RCLCPP_INFO(get_logger(), "homepoint: [%.2f, %.2f]",
-              node->x, node->y);
-        path_msg.data.push_back(static_cast<float>(node->x));
-        path_msg.data.push_back(static_cast<float>(node->y));
+    while (current != nullptr) {
+        path_msg.data.push_back(static_cast<float>(current->x));
+        path_msg.data.push_back(static_cast<float>(current->y));
+        current = current->parent;
     }
+
+    
 
     // Publish the path coordinates
     path_publisher_->publish(path_msg);
