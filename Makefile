@@ -34,6 +34,10 @@ build_obstacle_point_publisher:
 build_viz_tool:
 	colcon build --packages-select visulization
 
+## Build just viz tool 
+.PHONY : build_map_const
+build_map_const:
+	colcon build --packages-select map_const
 
 ## Source project
 .PHONY : source_project
@@ -56,7 +60,7 @@ run_target_point:
 .PHONY : run_rrt_start
 run_rrt_start:
 	@make source_project
-	ros2 run  rrt_start rrtstart 
+	ros2 run rrt_star rrtstar
 
 
 ## Run just obstacle point publisher
@@ -64,3 +68,17 @@ run_rrt_start:
 run_obstacle_point:
 	@make source_project
 	ros2 run obstacle_location obstaclelocation
+
+## Run just map point publisher
+.PHONY : run_map
+run_map:
+	@make source_project
+	ros2 run map_const map 
+
+## Run just viz tool
+.PHONY : run_viz
+run_viz:
+	@make source_project
+	ros2 run visulization viz 
+
+
