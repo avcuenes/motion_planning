@@ -53,3 +53,4 @@ This project visualize the start and end point, paths generated from rrt_star pr
 ## How to Run the Project
 
 We test this project using the following ros2 foxy distro and ubuntu 20.04.
+
