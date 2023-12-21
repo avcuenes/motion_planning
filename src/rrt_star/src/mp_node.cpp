@@ -125,7 +125,7 @@ void MP::targetpoint_callback(const std_msgs::msg::Float32MultiArray::SharedPtr 
 
 int main(int argc, char * argv[])
 { 
-  std::cout << "enes "<< std::endl;
+  std::cout << "MotionPlanning"<< std::endl;
   
   rclcpp::init(argc, argv);
   rclcpp::spin(std::make_shared<MP>());
