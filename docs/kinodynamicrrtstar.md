@@ -13,6 +13,11 @@ The paper emphasizes the importance of considering differential constraints in k
 
 In summary, this article contributes a novel algorithm for optimal trajectory generation, considering state-space dynamics, collision avoidance, and adherence to dynamic constraints. The proposed method exhibits efficiency and applicability to various robotic systems, showcasing its potential impact on kinodynamic planning in complex scenarios.
 
+
+
+![](img/kinopsuedocode.png)
+![](img/kinorrtx.png)
+
 ## Kinodynamic Planning
 
 In the realm of robotics and motion planning, kinodynamic planning constitutes a class of challenges where stringent constraints related to velocity, acceleration, and force/torque must be adhered to. The objective of kinodynamic planning revolves around navigating a robot from an initial state to a designated goal region, all while circumventing obstacles and adhering to both kinematic and dynamic constraints. These constraints dictate the intricate relationship between a robot's controls and its motion. The term "kinodynamic" was first introduced in 1993, marking a pivotal moment in the evolution of planning methodologies. Within kinodynamic planning, a vehicle's dynamics are treated differentially, providing a nuanced understanding of its motion characteristics.
