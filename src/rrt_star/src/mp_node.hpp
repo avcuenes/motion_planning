@@ -24,6 +24,16 @@ private:
         float z;
     } homepoint,targetpoint;
 
+    /*
+    Define structure for map constraint */
+    
+    struct {
+        double xmin,ymin;
+        double xmax,ymax;
+    } mapconstraint;
+
+    
+
     /*Define structure for obstacle point  */
     struct {
         float x;
@@ -43,7 +53,8 @@ private:
     void homepoint_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg) ;
     /*targetpoint location callback function*/
     void targetpoint_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg) ;
-
+    /*map callback function*/
+    void map_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg) ;
 
     // Publish the path coordinates
     void    publishPath();    
@@ -53,6 +64,8 @@ private:
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr obstaclepoints_;    
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr homepoint_;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr targetpoint_;
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr mapconst_;
+    
 
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr path_publisher_;
 

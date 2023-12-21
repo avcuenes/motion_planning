@@ -18,10 +18,28 @@ MP::MP() :  Node("MotionPlanning")
     targetpoint_ = this->create_subscription<std_msgs::msg::Float32MultiArray>(
       "target_point", 10, std::bind(&MP::targetpoint_callback, this, _1));
 
+    mapconst_ = this->create_subscription<std_msgs::msg::Float32MultiArray>(
+      "map_const", 10, std::bind(&MP::map_callback, this, _1));
+
+       
+
     path_publisher_ = create_publisher<std_msgs::msg::Float32MultiArray>("path_points", 10);
     
 }
 
+void MP::map_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg)
+{ 
+  const auto map_sub = msg->data;
+  mapconstraint.xmin = map_sub[0];
+  mapconstraint.ymin = map_sub[1];
+  mapconstraint.xmax = map_sub[2];
+  mapconstraint.ymax = map_sub[3];
+  
+  
+  RCLCPP_INFO(get_logger(), "map constraints: [%.2f, %.2f, %.2f,%.2f]",
+              mapconstraint.xmin, mapconstraint.ymin, mapconstraint.xmax, mapconstraint.ymax);
+  
+}
 
 void MP::obstacle_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg)
 { 
