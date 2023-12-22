@@ -8,7 +8,10 @@
 using std::placeholders::_1;
 
 MP::MP() :  Node("MotionPlanning") 
-{
+{   
+    // MP class constructor
+
+    // Define topics for subscribers
     obstaclepoints_ = this->create_subscription<std_msgs::msg::Float32MultiArray>(
       "obstacle_point", 10, std::bind(&MP::obstacle_callback, this, _1));
   
@@ -22,9 +25,10 @@ MP::MP() :  Node("MotionPlanning")
       "map_const", 10, std::bind(&MP::map_callback, this, _1));
 
       
-
+    // Define the topics for publisher
     path_publisher_ = create_publisher<std_msgs::msg::Float32MultiArray>("path_points", 10);
 
+    // Set messages flags 
     message_obstacle_ = false;
     message_homepoint_ = false;
     message_targetpoint_ = false;
@@ -32,7 +36,7 @@ MP::MP() :  Node("MotionPlanning")
 
     
 }
-
+// map callback function
 void MP::map_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg)
 { 
   const auto map_sub = msg->data;
@@ -48,6 +52,7 @@ void MP::map_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg)
   
 }
 
+// obstacle callback function
 void MP::obstacle_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg)
 { 
   
@@ -65,7 +70,7 @@ void MP::obstacle_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg
   message_obstacle_ = true;
 }
 
-
+// homepoint callback function
 void MP::homepoint_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg)
 { 
   const auto home_point_sub = msg->data;
@@ -85,7 +90,7 @@ void MP::homepoint_callback(const std_msgs::msg::Float32MultiArray::SharedPtr ms
   
 }
 
-
+// publish function for path 
 void MP::publishPath() {
 
     std_msgs::msg::Float32MultiArray path_msg;
@@ -124,6 +129,8 @@ void MP::publishPath() {
     path_publisher_->publish(path_msg);
 }
 
+
+// target point callback function
 void MP::targetpoint_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg)
 { 
   const auto target_point_sub = msg->data;

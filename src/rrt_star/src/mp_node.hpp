@@ -7,10 +7,13 @@
 #include "rrtstar.cpp"
 
 enum Algorithms 
-{   KinoRRTStar = 0, 
+{   
+    KinoRRTStar = 0, 
     AStar ,
     CHOMP 
 };
+
+
 using std::placeholders::_1;
 
 class MP : public rclcpp::Node
@@ -65,15 +68,16 @@ private:
     void    publishPath();    
     
 
-    
+    // Define subscriptions types
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr obstaclepoints_;    
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr homepoint_;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr targetpoint_;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr mapconst_;
     
-
+    // Define publisher types
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr path_publisher_;
 
+    // Define messages flags
     bool message_obstacle_;
     bool message_homepoint_;
     bool message_targetpoint_;
