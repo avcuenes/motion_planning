@@ -64,6 +64,23 @@ You can see the following folders at terminal;
 ```bash
 docs  Makefile  MotionPlanning.drawio.pdf  README.md  rosgraph.svg  src
 ```
+At this project , we use some python scripts to visualize the plot because of that you be sure to use the right version of python library.
+We use python3 for this project , please write the following command to sure python version is 3;
+```bash
+python3 --version
+```
+And check the python library. If you see the following output , you can sure;
+
+```bash
+Python 3.8.10
+```
+
+To setup the other python libraries , write the following command;
+
+```bash
+cd tools/setup
+bash setup.sh
+```
 
 Then,Please open the new terminal and write the following command to build the project;
 
@@ -75,4 +92,32 @@ or
 colcon build 
 ```
 
+After the build is complete. You can run the following command;
 
+```bash
+make source_project
+```
+> [!NOTE]  
+> For every new terminal you have to source project.
+
+
+Then every project can run new terminal. You can run the following command to run projects.
+
+```bash
+make run_home_point
+make run_target_point
+make run_rrt_start
+make run_obstacle_point
+make run_map
+make run_viz
+```
+or 
+
+```bash
+ros2 run home_point_pub homepoint
+ros2 run target_point_pub targetpoint
+ros2 run rrt_star rrtstar
+ros2 run obstacle_location obstaclelocation
+ros2 run map_const map 
+ros2 run visulization viz 
+```
