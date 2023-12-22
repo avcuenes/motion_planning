@@ -4,7 +4,6 @@
 #include "std_msgs/msg/string.hpp"
 #include <std_msgs/msg/float32_multi_array.hpp>
 #include <iostream>
-#include "vehiclemodel.hpp"
 #include "rrtstar.cpp"
 
 enum Algorithms 
