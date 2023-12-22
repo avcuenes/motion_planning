@@ -47,7 +47,6 @@ private:
         float r;
     } obstaclepoint;
 
-    VehicleModel model1;
     RRTStar rrtStar;
 
    
