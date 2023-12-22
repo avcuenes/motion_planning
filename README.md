@@ -12,7 +12,9 @@ At this project, we use the following algorithm for motion planning. Kinodynamic
 ```markdown
 motion_planning/
 │
-├── Makefile # Make commands 
+├── Makefile                # Make commands 
+├── docs                    # Documentation about project
+├── tools                   # Some scripting tools
 └── src/
 │   ├── home_point_pub     # Home point publisher project
 │   └── map_constraint_pub # Map constraint publisher project
