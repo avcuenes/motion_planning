@@ -32,4 +32,4 @@ jobs:
     - name: make 
       run: |
         source /opt/ros/${{ matrix.ros_distribution }}/setup.bash
-        make build_all
+        colcon build
