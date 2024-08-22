@@ -6,12 +6,36 @@ on:
   pull_request:
     branches: [ "*" ]
 
+
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4
-    - name: make
-      run: make build_all
+    # The CMake configure and build commands are platform agnostic and should work equally
+    # well on Windows or Mac.  You can convert this to a matrix build if you need
+    # cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    name: Build on ros ${{ matrix.ros_distribution }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        ros_distribution: [ noetic, humble, iron, rolling]
+        include:
+        - ros_distribution: 'noetic'
+          os: ubuntu-20.04
+        - ros_distribution: 'humble'
+          os: ubuntu-22.04
+        - ros_distribution: 'iron'
+          os: ubuntu-22.04
+        - ros_distribution: 'rolling'
+          os: ubuntu-22.04
+          
+    steps:   
+    - uses: ros-tooling/setup-ros@v0.6
+      with:
+        required-ros-distributions: ${{ matrix.ros_distribution }}
+    
+    - uses: actions/checkout@v2
+    
+    - name: make 
+      run: |
+        source /opt/ros/${{ matrix.ros_distribution }}/setup.bash
+        make build_all
