@@ -13,7 +13,7 @@ jobs:
     # well on Windows or Mac.  You can convert this to a matrix build if you need
     # cross-platform coverage.
     runs-on: ubuntu-18.04
-        container:
+    container:
             image: ghcr.io/avcuenes/my_special_ubuntu:latest
             credentials:
                username: avcuenes
