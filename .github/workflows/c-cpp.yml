@@ -12,15 +12,14 @@ jobs:
     # The CMake configure and build commands are platform agnostic and should work equally
     # well on Windows or Mac.  You can convert this to a matrix build if you need
     # cross-platform coverage.
+    runs-on: ubuntu-18.04
+        container:
+            image: ghcr.io/avcuenes/my_special_ubuntu:latest
+            credentials:
+               username: avcuenes
+               password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
     # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-    name: Build on ros ${{ matrix.ros_distribution }} and ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        ros_distribution: [humble]
-        include:
-        - ros_distribution: 'humble'
-          os: ubuntu-22.04
+   
 
           
     steps:   
