@@ -24,7 +24,6 @@ motion_planning/
 |   └── visulization       # Visulization project
 
 ```
-
 ## Projects 
 There is a few projects to simulate real life. Projects ros-graph is like the following pictures;
 
